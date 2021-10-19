@@ -20,20 +20,15 @@ int main()
     pq.push({0,src});
     while(!pq.empty())
     {
-        int dis=pq.top().first;
-        int prev=pq.top().second;
-        pq.pop();
-        for(auto next:adj[prev])
-        {
-            int nextval=next.first;
-            int nextdist=next.second;
-            if(dist[prev]+next.second<dist[nextval])
-            {
-                dist[nextval]=dist[prev]+next.second;
-                pq.push(make_pair(dist[nextval], nextval));
+         int node=pq.top().second;
+            int nodedist=pq.top().first;
+            pq.pop();
+            for(auto nbr:adj[node]){
+                if(nodedist+nbr[1]<dist[nbr[0]]){
+                    dist[nbr[0]]=nodedist+nbr[1];
+                    pq.push({dist[nbr[0]],nbr[0]});
+                }
             }
-            
-        }
     }
 
 
